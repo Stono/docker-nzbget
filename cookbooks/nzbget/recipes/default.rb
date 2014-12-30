@@ -31,15 +31,13 @@ nzbConfig = {
 
 Chef::Log.info("NZBGet username: nzbget, password: #{nzbConfig[:password]}")
 
-template '/storage/config/nzbget.conf' do
-  source 'nzbget.conf.erb'
-  variables ({ :confvars => nzbConfig })
+directory "/storage" do
   owner 'nzbget'
   group 'nzbget'
-  action :create_if_missing
+  action :create
 end
 
-dirs = %w(dst inter nzb queue tmp scripts config/ssl)
+dirs = %w(dst inter nzb queue tmp scripts config config/ssl)
 dirs.each do |dir|
   directory "/storage/#{dir}" do
     owner 'nzbget'
@@ -47,6 +45,14 @@ dirs.each do |dir|
     action :create
     recursive true
   end
+end
+
+template '/storage/config/nzbget.conf' do
+  source 'nzbget.conf.erb'
+  variables ({ :confvars => nzbConfig })
+  owner 'nzbget'
+  group 'nzbget'
+  action :create_if_missing
 end
 
 execute 'create_ssl_certificates' do

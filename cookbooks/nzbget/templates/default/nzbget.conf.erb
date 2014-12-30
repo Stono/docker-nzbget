@@ -25,10 +25,10 @@ ControlIP=0.0.0.0
 ControlPort=6789
 ControlUsername=nzbget
 ControlPassword=<%= @confvars[:password] %>
-SecureControl=no
+SecureControl=yes
 SecurePort=6791
-SecureCert=
-SecureKey=
+SecureCert=/storage/config/ssl/cert.pem
+SecureKey=/storage/config/ssl/key.pem
 AuthorizedIP=
 DaemonUsername=root
 UMask=1000

@@ -14,11 +14,14 @@ RUN cd /usr/local/src && \
     make install-strip && \
     rm -rf /usr/local/src/nzb*
 
-RUN useradd nzbget
-
 COPY services/* /etc/supervisord.d/
 COPY cookbooks/ /chef/cookbooks/
-COPY start-nzbget.sh /usr/local/bin/start-nzbget.sh
+
+RUN useradd nzbget
+
+RUN chown -R nzbget:nzbget /usr/local/share/nzbget && \
+    chown nzbget:nzbget /usr/local/bin/nzbget && \
+    chown nzbget:nzbget /usr/local/sbin/nzbgetd
 
 EXPOSE 6789
 EXPOSE 6791
