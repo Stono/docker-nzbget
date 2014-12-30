@@ -19,7 +19,10 @@ From there you can start it with `sudo fig up -d` and connect to it on:
 
 Or if you don't want to use fig, this will do the job:
 ```
-sudo docker run -d -e="nzb_password=YourNzbPassword" -v "/home/karl/development/git/github/docker-nzbget/storage:/storage" -p "80:6789" -p "443:6791" stono/nzbget
+sudo docker run -d -e="nzb_password=YourNzbPassword" && \
+  -v "/home/karl/development/git/github/docker-nzbget/storage:/storage" && \
+  -p "80:6789" && \
+  -p "443:6791" stono/nzbget
 ```
 ## Storage
 As you can see above, /storage is a persistent volume which you can mount.  If you mount an empty directory the startup script will automatically create:
