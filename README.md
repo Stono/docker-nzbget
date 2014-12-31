@@ -36,4 +36,4 @@ As you can see above, /storage is a persistent volume which you can mount.  If y
   - scripts
   - tmp
 
-They're all pretty standard from the config.  At the moment, things aren't that configurable, so many sure if you mount a /storage volume where config/nzbget.conf already exists, your directories match those above.
+They're all pretty standard from the config.  At the moment, things aren't that configurable, so make sure if you mount a /storage volume where config/nzbget.conf already exists, your directories match those above.
