@@ -31,15 +31,10 @@ nzbConfig = {
 
 puts("NZBGet username: nzbget, password: #{nzbConfig[:password]}")
 
-directory "/storage" do
-  owner 'nzbget'
-  group 'nzbget'
-  action :create
-end
-
 directory "/storage/nzbget" do
   owner 'nzbget'
   group 'nzbget'
+  recursive true
   action :create
 end
 
