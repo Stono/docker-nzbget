@@ -14,9 +14,6 @@ RUN cd /usr/local/src && \
     make install-strip && \
     rm -rf /usr/local/src/nzb*
 
-COPY services/* /etc/supervisord.d/
-COPY cookbooks/ /chef/cookbooks/
-
 RUN useradd nzbget
 
 RUN chown -R nzbget:nzbget /usr/local/share/nzbget && \
@@ -28,3 +25,6 @@ EXPOSE 6791
 
 ENV chef_node_name nzbget.docker.local
 ENV chef_run_list nzbget 
+
+COPY services/* /etc/supervisord.d/
+COPY cookbooks/ /chef/cookbooks/

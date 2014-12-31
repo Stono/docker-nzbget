@@ -26,14 +26,14 @@ sudo docker run -d -e="nzb_password=YourNzbPassword" && \
 ```
 ## Storage
 As you can see above, /storage is a persistent volume which you can mount.  If you mount an empty directory the startup script will automatically create:
-  - config
-  - config/nzbget.conf
-  - config/ssl/_certs_
-  - dst
-  - inter
-  - nzb
-  - queue
-  - scripts
-  - tmp
+  - /nzbget/config
+  - /nzbget/config/nzbget.conf
+  - /nzbget/config/ssl/_certs_
+  - /nzbget/dst
+  - /nzbget/inter
+  - /nzbget/nzb
+  - /nzbget/queue
+  - /nzbget/scripts
+  - /nzbget/tmp
 
 They're all pretty standard from the config.  At the moment, things aren't that configurable, so many sure if you mount a /storage volume where config/nzbget.conf already exists, your directories match those above.

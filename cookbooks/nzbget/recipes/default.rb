@@ -37,9 +37,15 @@ directory "/storage" do
   action :create
 end
 
+directory "/storage/nzbget" do
+  owner 'nzbget'
+  group 'nzbget'
+  action :create
+end
+
 dirs = %w(dst inter nzb queue tmp scripts config config/ssl)
 dirs.each do |dir|
-  directory "/storage/#{dir}" do
+  directory "/storage/nzbget/#{dir}" do
     owner 'nzbget'
     group 'nzbget'
     action :create
@@ -47,7 +53,7 @@ dirs.each do |dir|
   end
 end
 
-template '/storage/config/nzbget.conf' do
+template '/storage/nzbget/config/nzbget.conf' do
   source 'nzbget.conf.erb'
   variables ({ :confvars => nzbConfig })
   owner 'nzbget'
@@ -56,11 +62,11 @@ template '/storage/config/nzbget.conf' do
 end
 
 execute 'create_ssl_certificates' do
-  cwd '/storage/config/ssl'
+  cwd '/storage/nzbget/config/ssl'
   command <<-EOH
     openssl req -subj "/CN=nzbget.local/O=FakeOrg/C=UK" -new -newkey rsa:2048 -days 1365 -nodes -x509 -sha256 -keyout key.pem -out cert.pem
   EOH
   user 'nzbget'
   group 'nzbget'
-  not_if { File.exist?('/storage/config/ssl/key.pem') }
+  not_if { File.exist?('/storage/nzbget/config/ssl/key.pem') }
 end
