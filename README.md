@@ -6,7 +6,7 @@ The easiest way to use this is probably a fig file:
 nzbget:
   image: stono/nzbget 
   environment:
-    nzb_password: "YourNzbPassword"
+    nzb_password: "YourNzbPassword" // If you dont specify a password, one will be generated for you
   volumes:
     - ./storage:/storage
   ports:
