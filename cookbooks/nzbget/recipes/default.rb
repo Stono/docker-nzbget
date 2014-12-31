@@ -29,7 +29,7 @@ nzbConfig = {
   :password => default_value(ENV['nzb_password'], generatePassword())
 }
 
-Chef::Log.info("NZBGet username: nzbget, password: #{nzbConfig[:password]}")
+puts("NZBGet username: nzbget, password: #{nzbConfig[:password]}")
 
 directory "/storage" do
   owner 'nzbget'
