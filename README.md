@@ -24,16 +24,14 @@ sudo docker run -d -e="nzb_password=YourNzbPassword" && \
   -p "80:6789" && \
   -p "443:6791" stono/nzbget
 ```
-## Storage
-As you can see above, /storage is a persistent volume which you can mount.  If you mount an empty directory the startup script will automatically create:
-  - /nzbget/config
-  - /nzbget/config/nzbget.conf
-  - /nzbget/config/ssl/_certs_
-  - /nzbget/dst
-  - /nzbget/inter
-  - /nzbget/nzb
-  - /nzbget/queue
-  - /nzbget/scripts
-  - /nzbget/tmp
 
-They're all pretty standard from the config.  At the moment, things aren't that configurable, so make sure if you mount a /storage volume where config/nzbget.conf already exists, your directories match those above.
+## Storage
+All config / data gets written to /storage/nzbget on the first "fig up", so if you mount in that volume to somewhere on your system, all your configuration will be preserved through docker container updates.
+
+You could mount in your own, already existing config directory if you like.
+
+## Info 
+This is part of a set, all based of the same images, all desgined to eventually piece together.
+  - [stono/sonarr](https://github.com/Stono/docker-sonarr) Sonarr in a Docker container
+  - [stono/nzbget](https://github.com/Stono/docker-nzbget) NzbGet in a Docker container
+  - [stono/couchpotato](https://github.com/Stono/docker-couchpotato) Couchpotato in a docker container
