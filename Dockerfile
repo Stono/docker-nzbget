@@ -14,11 +14,9 @@ RUN cd /usr/local/src && \
     make install-strip && \
     rm -rf /usr/local/src/nzb*
 
-RUN useradd nzbget
-
-RUN chown -R nzbget:nzbget /usr/local/share/nzbget && \
-    chown nzbget:nzbget /usr/local/bin/nzbget && \
-    chown nzbget:nzbget /usr/local/sbin/nzbgetd
+RUN chown -R docker:docker /usr/local/share/nzbget && \
+    chown docker:docker /usr/local/bin/nzbget && \
+    chown docker:docker /usr/local/sbin/nzbgetd
 
 EXPOSE 6789
 EXPOSE 6791

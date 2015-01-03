@@ -32,8 +32,8 @@ nzbConfig = {
 puts("NZBGet username: nzbget, password: #{nzbConfig[:password]}")
 
 directory "/storage/nzbget" do
-  owner 'nzbget'
-  group 'nzbget'
+  owner 'docker'
+  group 'docker'
   recursive true
   action :create
 end
@@ -41,8 +41,8 @@ end
 dirs = %w(dst inter nzb queue tmp scripts config config/ssl)
 dirs.each do |dir|
   directory "/storage/nzbget/#{dir}" do
-    owner 'nzbget'
-    group 'nzbget'
+    owner 'docker'
+    group 'docker'
     action :create
     recursive true
   end
@@ -51,8 +51,8 @@ end
 template '/storage/nzbget/config/nzbget.conf' do
   source 'nzbget.conf.erb'
   variables ({ :confvars => nzbConfig })
-  owner 'nzbget'
-  group 'nzbget'
+  owner 'docker'
+  group 'docker'
   action :create_if_missing
 end
 
@@ -61,7 +61,7 @@ execute 'create_ssl_certificates' do
   command <<-EOH
     openssl req -subj "/CN=nzbget.local/O=FakeOrg/C=UK" -new -newkey rsa:2048 -days 1365 -nodes -x509 -sha256 -keyout key.pem -out cert.pem
   EOH
-  user 'nzbget'
-  group 'nzbget'
+  user 'docker'
+  group 'docker'
   not_if { File.exist?('/storage/nzbget/config/ssl/key.pem') }
 end
