@@ -18,8 +18,16 @@ RUN chown -R docker:docker /usr/local/share/nzbget && \
     chown docker:docker /usr/local/bin/nzbget && \
     chown docker:docker /usr/local/sbin/nzbgetd
 
-EXPOSE 6789
-EXPOSE 6791
+RUN cd /usr/local/src && \
+    wget --quiet http://www.rarlab.com/rar/unrarsrc-4.2.4.tar.gz && \
+    tar -zxf unrar* && \
+    cd unrar && \
+    cp makefile.unix Makefile && \
+    make && \
+    make install && \
+    rm -rf /usr/local/src/unrar* 
+
+EXPOSE 6789 6791
 
 ENV chef_node_name nzbget.docker.local
 ENV chef_run_list nzbget 
